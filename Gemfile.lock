@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    pitstop (0.1.0)
+    pitstop (0.1.2)
       k8s-client (~> 0.10.1)
       thor (~> 0.20.3)
 
