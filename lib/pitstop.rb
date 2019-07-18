@@ -9,11 +9,13 @@ module Pitstop
 
     def initialize(*args)
       super
-      @client = K8s::Client.config(
-        K8s::Config.load_file(
-          File.expand_path '~/.kube/config'
-        )
-      )
+      @client = K8s::Client.config( K8s::Config.load_file( File.expand_path '~/.kube/config'))
+    end
+
+    desc 'delete_all', 'delete all stores'
+    def delete_all
+      @client.api('v1').resource('pods', namespace: 'default').delete_collection(labelSelector: {app: 'f1sales-api'})
+      puts "Deleted all stores"
     end
 
     desc 'delete', 'delete a store (also its sidekiq)'
