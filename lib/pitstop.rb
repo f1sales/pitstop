@@ -18,6 +18,13 @@ module Pitstop
       puts "Deleted all stores"
     end
 
+    desc 'name', 'get pod name'
+    def name(store_name)
+      @client.api('v1').resource('pods', namespace: 'default').list(labelSelector: {tier: store_name}).map do |pod|
+        pod.metadata.name
+      end.first
+    end
+
     desc 'delete', 'delete a store (also its sidekiq)'
     def delete(store_name)
       [store_name, "sidekiq-#{store_name}"].each do |tier|
