@@ -20,9 +20,11 @@ module Pitstop
 
     desc 'name', 'get pod name'
     def name(store_name)
-      @client.api('v1').resource('pods', namespace: 'default').list(labelSelector: {tier: store_name}).map do |pod|
+      name = @client.api('v1').resource('pods', namespace: 'default').list(labelSelector: {tier: store_name}).map do |pod|
         pod.metadata.name
       end.first
+      puts name
+      name
     end
 
     desc 'delete', 'delete a store (also its sidekiq)'
