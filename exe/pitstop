@@ -2,5 +2,4 @@
 
 require 'pitstop'
 
-Pitstop::K8SCommands.start( ARGV )
-
+Pitstop::K8SCommands.start(ARGV)
